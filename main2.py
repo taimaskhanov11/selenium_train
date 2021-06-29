@@ -1,13 +1,8 @@
-import base64
-import io
 import os
 from datetime import datetime
 
-import requests
-from PIL import Image
-from bs4 import BeautifulSoup
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
+
 import time
 
 # options
@@ -31,6 +26,7 @@ chrome_options.add_argument("--no-sandbox")
 driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
 
 
+# driver = webdriver.Chrome('/home/rasul/PycharmProjects/selenium_train/googledriver/chromedriver')
 
 
 def avito_auth(url):
@@ -46,7 +42,7 @@ def avito_auth(url):
         #
         driver.get(url=url_ad)
         #
-        time.sleep(1)#todo
+        time.sleep(1)  # todo
         price_ad = driver.find_element_by_class_name('item-price-wrapper').text  # !цена
         name_user_ad = driver.find_element_by_class_name('seller-info-value').find_element_by_tag_name(
             'a').get_attribute('text').strip()  # ! имя
@@ -69,6 +65,7 @@ def avito_auth(url):
     finally:
         driver.close()
         driver.quit()
+
 
 def correct_time(string):
     print(string)
